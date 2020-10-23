@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Reload Express Sample App</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+  </head>
+  <body>
+    <h2>HTML Forms</h2>
+
+<form action="/action_page.php">
+  <label for="fname">Userid:</label><br>
+  <input type="text" id="userid" name="userid" value=""><br>
+  <label for="lname">password:</label><br>
+  <input type="text" id="password" name="password" value=""><br><br>
+  <input type="submit" id="submit" value="Submit">
+</form> 
+
+  </body>
+  
+
+
+        
+
+
+
+  
+</html>
+<script>
+
+// setTimeout(function(){
+// location = 'http://localhost:3000'
+// document.location ="/"
+// },2000)
+document.getElementById("joinameeting").addEventListener('click', (ev)=>{
+        ev.preventDefault();
+        var meetingID = $("#username2").val();
+        console.log(meetingID,"meetingid")
+var obj = { 
+        
+       userid:meetingID
+
+     
+      }
+
+$.ajax({
+                type: "post",
+                url:"http://localhost:8000/test",
+                data: JSON.stringify(obj),
+                contentType: 'application/json',
+                
+
+                success: function(response) {
+                  console.log(response,"response>>>>>")
+                  var result = response
+                  console.log(result,"dfdsffffffffffffff")
+                  if(result.result == "Incorrect meetingID"){
+                      Swal.fire(result.result)
+                  }
+                  else{
+                  var url = result.result.url
+
+                  window.location =url
+                  }
+
+                                    
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                    
+                }
+            })
+
+
+
+        
+    
+</script>
